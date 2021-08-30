@@ -11,19 +11,6 @@ nextgen_bows.register_bow('bow_wood', {
 	}
 })
 
-nextgen_bows.register_bow('crossbow_wood', {
-	description = 'Wooden Crossbow',
-	uses = 385,
-	-- `crit_chance` 10% chance, 5 is 20% chance
-	-- (1 / crit_chance) * 100 = % chance
-	crit_chance = 10,
-	recipe = {
-		{'', 'default:stick', ''},
-		{'default:stick', '', 'default:stick'},
-		{'farming:string', 'default:steel_ingot', 'farming:string'},
-	}
-})
-
 nextgen_bows.register_arrow('arrow', {
 	description = 'Arrow',
 	inventory_image = 'nextgen_bows_arrow.png',

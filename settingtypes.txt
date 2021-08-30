@@ -1,2 +1,2 @@
 # Disabled per default due to inconsistent mob models scaling (visual_size). This will scale the arrows unproportionally and looks bad. If you have mobs with no scaling you can enable this setting.
-x_bows_attach_arrows_to_entities (Attach arrows to entities) bool false
+nextgen_bows_attach_arrows_to_entities (Attach arrows to entities) bool false
