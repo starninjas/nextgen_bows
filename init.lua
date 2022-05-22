@@ -348,6 +348,10 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
+minetest.register_on_leaveplayer(function(player)
+	nextgen_bows.player_bow_sneak[player:get_player_name()] = nil
+end)
+
 local path = minetest.get_modpath('nextgen_bows')
 
 dofile(path .. '/arrow.lua')
