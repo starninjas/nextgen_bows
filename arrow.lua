@@ -71,8 +71,7 @@ minetest.register_entity('nextgen_bows:arrow_entity', {
 		self._is_critical_hit = _staticdata.is_critical_hit
 
 		self.object:set_properties({
-			textures = {'nextgen_bows:arrow_node'},
-			infotext = self.arrow
+			textures = {'nextgen_bows:arrow_node'}
 		})
 	end,
 
