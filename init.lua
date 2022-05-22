@@ -47,6 +47,7 @@ function nextgen_bows.register_bow(name, def)
 		inventory_image = def.inventory_image_charged or 'nextgen_bows_bow_wood_charged.png',
 		on_use = nextgen_bows.shoot,
 		groups = {bow = 1, flammable = 1, not_in_creative_inventory = 1},
+		range = 0 -- player can't interact with charged bow
 	})
 
 	-- recipes
