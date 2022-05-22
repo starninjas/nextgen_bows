@@ -3,7 +3,6 @@ local bow_charged_timer = 0
 
 nextgen_bows = {
 	pvp = minetest.settings:get_bool('enable_pvp') or false,
-	creative = minetest.settings:get_bool('creative_mode') or false,
 	hbhunger = minetest.get_modpath('hbhunger'),
 	registered_arrows = {},
 	registered_bows = {},
@@ -12,10 +11,6 @@ nextgen_bows = {
 		nextgen_bows_attach_arrows_to_entities = minetest.settings:get_bool("nextgen_bows_attach_arrows_to_entities", false)
 	}
 }
-
-function nextgen_bows.is_creative(name)
-	return nextgen_bows.creative or minetest.check_player_privs(name, {creative = true})
-end
 
 function nextgen_bows.register_bow(name, def)
 	if name == nil or name == '' then
@@ -47,6 +42,7 @@ function nextgen_bows.register_bow(name, def)
 		inventory_image = def.inventory_image_charged or 'nextgen_bows_bow_wood_charged.png',
 		on_use = nextgen_bows.shoot,
 		groups = {bow = 1, flammable = 1, not_in_creative_inventory = 1},
+		range = 0 -- player can't interact with charged bow
 	})
 
 	-- recipes
@@ -124,7 +120,7 @@ function nextgen_bows.load(itemstack, user, pointed_thing)
 				wielded_item:set_name(v_bow_name .. '_charged')
 				v_user:set_wielded_item(wielded_item)
 
-				if not nextgen_bows.is_creative(user:get_player_name()) then
+				if not minetest.is_creative_enabled(user:get_player_name()) then
 					inv:remove_item('main', itemstack_arrow:get_name())
 				end
 			end
@@ -214,7 +210,7 @@ function nextgen_bows.shoot(itemstack, user, pointed_thing)
 	obj:set_acceleration({x = dir.x * -3, y = -10, z = dir.z * -3})
 	obj:set_yaw(minetest.dir_to_yaw(dir))
 
-	if not nextgen_bows.is_creative(user:get_player_name()) then
+	if not minetest.is_creative_enabled(user:get_player_name()) then
 		itemstack:add_wear(65535 / uses)
 	end
 
@@ -345,6 +341,10 @@ minetest.register_globalstep(function(dtime)
 
 		bow_charged_timer = 0
 	end
+end)
+
+minetest.register_on_leaveplayer(function(player)
+	nextgen_bows.player_bow_sneak[player:get_player_name()] = nil
 end)
 
 local path = minetest.get_modpath('nextgen_bows')
