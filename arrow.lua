@@ -38,7 +38,7 @@ minetest.register_entity('nextgen_bows:arrow_entity', {
 		selectionbox = {0, 0, 0, 0, 0, 0},
 		physical = false,
 		textures = {'air'},
-		hp_max = 0.5
+		hp_max = 1
 	},
 
 	on_activate = function(self, staticdata)
