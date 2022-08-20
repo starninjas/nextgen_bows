@@ -71,8 +71,7 @@ minetest.register_entity('nextgen_bows:arrow_entity', {
 		self._is_critical_hit = _staticdata.is_critical_hit
 
 		self.object:set_properties({
-			textures = {'nextgen_bows:arrow_node'},
-			infotext = self.arrow
+			textures = {'nextgen_bows:arrow_node'}
 		})
 	end,
 
@@ -256,95 +255,99 @@ minetest.register_entity('nextgen_bows:arrow_entity', {
 					return
 				end
 
-				-- attach arrow prepare
-				local rotation = {x = 0, y = 0, z = 0}
-				local position = {x = 0, y = 0, z = 0}
+				if nextgen_bows.settings.nextgen_bows_attach_arrows_to_entities then
+					-- attach arrow prepare
+					local rotation = {x = 0, y = 0, z = 0}
+					local position = {x = 0, y = 0, z = 0}
 
-				if in_pos.x == 1 then
-					-- x = 0
-					-- y = -90
-					-- z = 0
-					rotation.x = math.random(-10, 10)
-					rotation.y = math.random(-100, -80)
-					rotation.z = math.random(-10, 10)
+					if in_pos.x == 1 then
+						-- x = 0
+						-- y = -90
+						-- z = 0
+						rotation.x = math.random(-10, 10)
+						rotation.y = math.random(-100, -80)
+						rotation.z = math.random(-10, 10)
 
-					position.x = xmax / 10
-					position.y = math.random(ymin, ymax) / 10
-					position.z = math.random(zmin, zmax) / 10
-				elseif in_pos.x == -1 then
-					-- x = 0
-					-- y = 90
-					-- z = 0
-					rotation.x = math.random(-10, 10)
-					rotation.y = math.random(80, 100)
-					rotation.z = math.random(-10, 10)
+						position.x = xmax / 10
+						position.y = math.random(ymin, ymax) / 10
+						position.z = math.random(zmin, zmax) / 10
+					elseif in_pos.x == -1 then
+						-- x = 0
+						-- y = 90
+						-- z = 0
+						rotation.x = math.random(-10, 10)
+						rotation.y = math.random(80, 100)
+						rotation.z = math.random(-10, 10)
 
-					position.x = xmin / 10
-					position.y = math.random(ymin, ymax) / 10
-					position.z = math.random(zmin, zmax) / 10
-				elseif in_pos.y == 1 then
-					-- x = -90
-					-- y = 0
-					-- z = -180
-					rotation.x = math.random(-100, -80)
-					rotation.y = math.random(-10, 10)
-					rotation.z = math.random(-190, -170)
+						position.x = xmin / 10
+						position.y = math.random(ymin, ymax) / 10
+						position.z = math.random(zmin, zmax) / 10
+					elseif in_pos.y == 1 then
+						-- x = -90
+						-- y = 0
+						-- z = -180
+						rotation.x = math.random(-100, -80)
+						rotation.y = math.random(-10, 10)
+						rotation.z = math.random(-190, -170)
 
-					position.x = math.random(xmin, xmax) / 10
-					position.y = ymax / 10
-					position.z = math.random(zmin, zmax) / 10
-				elseif in_pos.y == -1 then
-					-- x = 90
-					-- y = 0
-					-- z = 180
-					rotation.x = math.random(80, 100)
-					rotation.y = math.random(-10, 10)
-					rotation.z = math.random(170, 190)
+						position.x = math.random(xmin, xmax) / 10
+						position.y = ymax / 10
+						position.z = math.random(zmin, zmax) / 10
+					elseif in_pos.y == -1 then
+						-- x = 90
+						-- y = 0
+						-- z = 180
+						rotation.x = math.random(80, 100)
+						rotation.y = math.random(-10, 10)
+						rotation.z = math.random(170, 190)
 
-					position.x = math.random(xmin, xmax) / 10
-					position.y = ymin / 10
-					position.z = math.random(zmin, zmax) / 10
-				elseif in_pos.z == 1 then
-					-- x = 180
-					-- y = 0
-					-- z = 180
-					rotation.x = math.random(170, 190)
-					rotation.y = math.random(-10, 10)
-					rotation.z = math.random(170, 190)
+						position.x = math.random(xmin, xmax) / 10
+						position.y = ymin / 10
+						position.z = math.random(zmin, zmax) / 10
+					elseif in_pos.z == 1 then
+						-- x = 180
+						-- y = 0
+						-- z = 180
+						rotation.x = math.random(170, 190)
+						rotation.y = math.random(-10, 10)
+						rotation.z = math.random(170, 190)
 
-					position.x = math.random(xmin, xmax) / 10
-					position.y = math.random(ymin, ymax) / 10
-					position.z = zmax / 10
-				elseif in_pos.z == -1 then
-					-- x = -180
-					-- y = 180
-					-- z = -180
-					rotation.x = math.random(-190, -170)
-					rotation.y = math.random(170, 190)
-					rotation.z = math.random(-190, -170)
+						position.x = math.random(xmin, xmax) / 10
+						position.y = math.random(ymin, ymax) / 10
+						position.z = zmax / 10
+					elseif in_pos.z == -1 then
+						-- x = -180
+						-- y = 180
+						-- z = -180
+						rotation.x = math.random(-190, -170)
+						rotation.y = math.random(170, 190)
+						rotation.z = math.random(-190, -170)
 
-					position.x = math.random(xmin, xmax) / 10
-					position.y = math.random(ymin, ymax) / 10
-					position.z = zmin / 10
-				end
+						position.x = math.random(xmin, xmax) / 10
+						position.y = math.random(ymin, ymax) / 10
+						position.z = zmin / 10
+					end
 
-				-- attach arrow
-				self.object:set_attach(
-					pointed_thing.ref,
-					'',
-					position,
-					rotation,
-					true
-				)
-				self._attached = true
-				self._attached_to.type = pointed_thing.type
-				self._attached_to.pos = position
+					-- attach arrow
+					self.object:set_attach(
+						pointed_thing.ref,
+						'',
+						position,
+						rotation,
+						true
+					)
+					self._attached = true
+					self._attached_to.type = pointed_thing.type
+					self._attached_to.pos = position
 
-				local children = pointed_thing.ref:get_children()
+					local children = pointed_thing.ref:get_children()
 
-				-- remove last arrow when too many already attached
-				if #children >= 5 then
-					children[1]:remove()
+					-- remove last arrow when too many already attached
+					if #children >= 5 then
+						children[1]:remove()
+					end
+				else
+					self.object:remove()
 				end
 
 				return
@@ -403,7 +406,7 @@ minetest.register_entity('nextgen_bows:arrow_entity', {
 
 					for k, object in ipairs(minetest.get_objects_inside_radius(pointed_thing.under, 1)) do
 						if not object:is_player() and object:get_luaentity() and object:get_luaentity().name == 'nextgen_bows:arrow_entity' then
-							table.insert(children ,object)
+							table.insert(children, object)
 						end
 					end
 
