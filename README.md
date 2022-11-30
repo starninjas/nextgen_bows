@@ -31,6 +31,7 @@ Currently includes a Wooden Bow and arrows.
 - farming (bow and recipes)
 - 3d_armor (calculates damage including the armor)
 - playerphysics (force sneak when holding charged bow)
+- player_monoids (force sneak when holding charged bow)
 
 ## License:
 
