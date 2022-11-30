@@ -329,6 +329,8 @@ minetest.register_globalstep(function(dtime)
 			if item == 'nextgen_bows:bow_wood_charged' and not nextgen_bows.player_bow_sneak[name].sneak then
 				if minetest.get_modpath('playerphysics') then
 					playerphysics.add_physics_factor(player, 'speed', 'nextgen_bows:bow_wood_charged', 0.25)
+				elseif minetest.get_modpath('player_monoids') then
+					player_monoids.speed:add_change(player, 0.25, 'nextgen_bows:bow_wood_charged')
 				end
 
 				nextgen_bows.player_bow_sneak[name].sneak = true
@@ -336,6 +338,8 @@ minetest.register_globalstep(function(dtime)
 			elseif item ~= 'nextgen_bows:bow_wood_charged' and nextgen_bows.player_bow_sneak[name].sneak then
 				if minetest.get_modpath('playerphysics') then
 					playerphysics.remove_physics_factor(player, 'speed', 'nextgen_bows:bow_wood_charged')
+				elseif minetest.get_modpath('player_monoids') then
+					player_monoids.speed:del_change(player, 'nextgen_bows:bow_wood_charged')
 				end
 
 				nextgen_bows.player_bow_sneak[name].sneak = false
