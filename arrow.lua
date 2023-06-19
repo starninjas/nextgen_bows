@@ -328,6 +328,20 @@ minetest.register_entity('nextgen_bows:arrow_entity', {
 					position.z = zmin / 10
 				end
 
+				-- fix scaling
+				local scale = self.object:get_properties().visual_size
+				local parent_size = pointed_thing.ref:get_properties().visual_size
+				self.object:set_properties({
+					visual_size = {
+						x = scale.x / parent_size.x,
+						y = scale.y / parent_size.y,
+						z = scale.z / (parent_size.z or parent_size.x)
+					},
+				})
+				position.x = position.x / parent_size.x
+				position.y = position.y / parent_size.y
+				position.z = position.z / (parent_size.z or parent_size.x)
+
 				-- attach arrow
 				self.object:set_attach(
 					pointed_thing.ref,
