@@ -1,5 +1,7 @@
+local S = minetest.get_translator("nextgen_bows")
+
 nextgen_bows.register_bow('bow_wood', {
-	description = 'Wooden Bow',
+	description = S('Wooden Bow'),
 	uses = 385,
 	-- `crit_chance` 10% chance, 5 is 20% chance
 	-- (1 / crit_chance) * 100 = % chance
@@ -12,7 +14,7 @@ nextgen_bows.register_bow('bow_wood', {
 })
 
 nextgen_bows.register_arrow('arrow', {
-	description = 'Arrow',
+	description = S('Arrow'),
 	inventory_image = 'nextgen_bows_arrow.png',
 	craft = {
 		{'default:flint'},
