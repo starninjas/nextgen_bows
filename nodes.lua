@@ -12,9 +12,9 @@ minetest.register_node('nextgen_bows:arrow_node', {
 	-- Textures of node; top, bottom, right, left, front, back
 	tiles = {
 		'nextgen_bows_arrow_tile_point_top.png',
-		'nextgen_bows_arrow_tile_point_bottom.png',
-		'nextgen_bows_arrow_tile_point_right.png',
-		'nextgen_bows_arrow_tile_point_left.png',
+		'nextgen_bows_arrow_tile_point_top.png^[transform2',
+		'nextgen_bows_arrow_tile_point_top.png^[transform1',
+		'nextgen_bows_arrow_tile_point_top.png^[transform3',
 		'nextgen_bows_arrow_tile_tail.png',
 		'nextgen_bows_arrow_tile_tail.png'
 	},
