@@ -81,7 +81,15 @@ minetest.register_entity('nextgen_bows:arrow_entity', {
 			self.object:remove()
 			return
 		end
-
+		
+		if killer:is_player() then
+			local inv = killer:get_inventory()
+			if inv:room_for_item("main",self.arrow) then
+				inv:add_item("main",self.arrow)
+				return
+			end
+		end
+		
 		minetest.item_drop(ItemStack(self.arrow), nil, vector.round(self._old_pos))
 	end,
 
