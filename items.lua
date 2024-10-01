@@ -32,7 +32,7 @@ minetest.register_craft({
 	output = 'nextgen_bows:arrow 4',
 	recipe = {{'default:flint'},
 		  {'group:stick'},
-		  {'animalia:feather'}}
+		  {'group:feather'}}
 })
 		
 minetest.register_craft({
