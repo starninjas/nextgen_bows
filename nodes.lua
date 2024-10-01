@@ -13,8 +13,8 @@ minetest.register_node('nextgen_bows:arrow_node', {
 	tiles = {
 		'nextgen_bows_arrow_tile_point_top.png',
 		'nextgen_bows_arrow_tile_point_top.png^[transform2',
-		'nextgen_bows_arrow_tile_point_top.png^[transform1',
 		'nextgen_bows_arrow_tile_point_top.png^[transform3',
+		'nextgen_bows_arrow_tile_point_top.png^[transform1',
 		'nextgen_bows_arrow_tile_tail.png',
 		'nextgen_bows_arrow_tile_tail.png'
 	},
