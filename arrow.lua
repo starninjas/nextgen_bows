@@ -97,7 +97,6 @@ minetest.register_entity('nextgen_bows:arrow_entity', {
 		local pos = self.object:get_pos()
 		self._old_pos = self._old_pos or pos
 		local ray = minetest.raycast(self._old_pos, pos, true, true)
-		local pointed_thing = ray:next()
 
 		self._lifetimer = self._lifetimer - dtime
 		self._nodechecktimer = self._nodechecktimer - dtime
@@ -161,16 +160,16 @@ minetest.register_entity('nextgen_bows:arrow_entity', {
 				return
 			end
 		end
-
-		while pointed_thing do
+		
+		for pointed_thing in ray do
 			local ip_pos = pointed_thing.intersection_point
 			local in_pos = pointed_thing.intersection_normal
 			self.pointed_thing = pointed_thing
-
+			
 			if pointed_thing.type == 'object'
 				and pointed_thing.ref ~= self.object
 				and pointed_thing.ref:get_hp() > 0
-				and ((pointed_thing.ref:is_player() and pointed_thing.ref:get_player_name() ~= self.user:get_player_name()) or (pointed_thing.ref:get_luaentity() and pointed_thing.ref:get_luaentity().physical and pointed_thing.ref:get_luaentity().name ~= '__builtin:item'))
+				and ((pointed_thing.ref:is_player() and pointed_thing.ref:get_player_name() ~= self.user:get_player_name()) or (pointed_thing.ref:get_luaentity() and pointed_thing.ref:get_properties().physical and pointed_thing.ref:get_luaentity().name ~= '__builtin:item'))
 				and self.object:get_attach() == nil
 			then
 				if pointed_thing.ref:is_player() then
@@ -442,7 +441,6 @@ minetest.register_entity('nextgen_bows:arrow_entity', {
 					return
 				end
 			end
-			pointed_thing = ray:next()
 		end
 
 		self._old_pos = pos
