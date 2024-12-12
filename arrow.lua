@@ -226,12 +226,15 @@ minetest.register_entity('nextgen_bows:arrow_entity', {
 					distance,
 					_damage
 				)
-
-				pointed_thing.ref:add_velocity({
-					x = dir.x * knockback * -1,
-					y = 7,
-					z = dir.z * knockback * -1
-				})
+				
+				local v = pointed_thing.ref:get_luaentity()
+				if pointed_thing.ref:is_player() or v.is_mob or v._creatura_mob or v._cmi_is_mob then
+					pointed_thing.ref:add_velocity({
+						x = dir.x * knockback * -1,
+						y = 7,
+						z = dir.z * knockback * -1
+					})
+				end
 
 				pointed_thing.ref:punch(
 					self.object,
