@@ -331,6 +331,10 @@ minetest.register_globalstep(function(dtime)
 					playerphysics.add_physics_factor(player, 'speed', 'nextgen_bows:bow_wood_charged', 0.25)
 				elseif minetest.get_modpath('player_monoids') then
 					player_monoids.speed:add_change(player, 0.25, 'nextgen_bows:bow_wood_charged')
+				elseif minetest.get_modpath('pova') then
+					pova.add_override(player:get_player_name(),
+						'nextgen_bows:bow_wood_charged', {speed = -0.75})
+					pova.do_override(player)
 				end
 
 				nextgen_bows.player_bow_sneak[name].sneak = true
@@ -340,6 +344,10 @@ minetest.register_globalstep(function(dtime)
 					playerphysics.remove_physics_factor(player, 'speed', 'nextgen_bows:bow_wood_charged')
 				elseif minetest.get_modpath('player_monoids') then
 					player_monoids.speed:del_change(player, 'nextgen_bows:bow_wood_charged')
+				elseif minetest.get_modpath('pova') then
+					pova.del_override(player:get_player_name(),
+						'nextgen_bows:bow_wood_charged')
+					pova.do_override(player)
 				end
 
 				nextgen_bows.player_bow_sneak[name].sneak = false
